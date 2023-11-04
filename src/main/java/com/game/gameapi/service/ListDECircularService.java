@@ -40,4 +40,13 @@ public class ListDECircularService {
         kids.insertInPos(pos,kid);
         return "Adicionado";
     }
+    public String addToEnd(Kid kid) {
+        kids.addToEnd(kid);
+        return "Adicionado";
+    }
+
+    public String addToStart(Kid kid){
+        kids.addToStart(kid);
+        return "Adicionado";
+    }
 }
