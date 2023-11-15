@@ -109,7 +109,6 @@ public class ListDECircular {
 
         }
         this.size--;
-        System.out.println("New size value: "+this.size);
     }
 
     public NodeDECircular deleteById(String id) throws TangoException {

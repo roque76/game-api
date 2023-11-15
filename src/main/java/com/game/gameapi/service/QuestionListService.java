@@ -6,6 +6,7 @@ import com.game.gameapi.model.QuestionList;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,17 +15,25 @@ import java.util.List;
 public class QuestionListService {
     private QuestionList questions;
 
-    public QuestionListService(){
+    public QuestionListService() {
         questions = new QuestionList();
-        // falta leer de archivo preguntas de un txt o de una db
-        questions.addQuestion(new Question("What is the capital of France?",
-                Arrays.asList("Paris", "London", "Berlin", "Madrid"), (byte) 0, "q1"));
-        questions.addQuestion(new Question("What is the capital of England?",
-                Arrays.asList("Paris", "London", "Berlin", "Madrid"), (byte) 1, "q2"));
-        questions.addQuestion(new Question("What is the capital of Germany?",
-                Arrays.asList("Paris", "London", "Berlin", "Madrid"), (byte) 2, "q3"));
-        questions.addQuestion(new Question("What is the capital of Spain?",
-                Arrays.asList("Paris", "London", "Berlin", "Madrid"), (byte) 3, "q4"));
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("questions.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\\|");
+
+                String questionText = parts[0];
+                String[] options = parts[1].split(",");
+                Byte correctPos = Byte.parseByte(parts[2]);
+                String id = parts[3];
+
+                Question question = new Question(questionText, Arrays.asList(options), correctPos, id);
+                questions.addQuestion(question);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String addNewQuestion(Question newQuestion){
