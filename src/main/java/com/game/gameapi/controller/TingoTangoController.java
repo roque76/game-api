@@ -1,12 +1,12 @@
 package com.game.gameapi.controller;
 
+import com.game.gameapi.controller.dto.DataStructureDTO;
 import com.game.gameapi.controller.dto.ResponseDTO;
 import com.game.gameapi.exceptions.TangoException;
 import com.game.gameapi.model.Kid;
 import com.game.gameapi.model.Question;
 import com.game.gameapi.service.TingoTangoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -124,5 +124,32 @@ public class TingoTangoController {
     public ResponseEntity<ResponseDTO> getAwaitingQuestion(){
         return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
                 tingoTangoService.getQuestion(),null),HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/answerquestion")
+    public ResponseEntity<ResponseDTO> answerQuestion(@RequestBody DataStructureDTO response){
+
+        try {
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
+                    tingoTangoService.answerQuestion(response),null),HttpStatus.OK);
+        } catch (TangoException e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST.value(),
+                    null,errors),HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping(path = "/deletekidinpos/{pos}")
+    public ResponseEntity<ResponseDTO> deleteKidInPos(@PathVariable int pos){
+        try {
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
+                    tingoTangoService.deleteKidInPos(pos),null),HttpStatus.OK);
+        } catch (TangoException e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST.value(),
+                    null,errors),HttpStatus.OK);
+        }
     }
 }

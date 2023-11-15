@@ -6,8 +6,6 @@ import com.game.gameapi.model.*;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Node;
-
 import java.util.List;
 import java.util.Random;
 
@@ -25,7 +23,8 @@ public class TingoTangoService {
         this.questionService = questionService;
 
         this.game = new TingoTango(listDEService.getKids(),
-                questionService.getAll(),false,false,null,null);
+                questionService.getAll(),false,false,
+                null,null,null);
     }
 
     public String addNewQuestion (Question newQuestion){
@@ -124,21 +123,23 @@ public class TingoTangoService {
             if (game.getAwaitingKid() == null) {
                 temp = listDEService.getKids().getHead();
             } else {
-                temp = new NodeDECircular(game.getAwaitingKid());
+                temp = game.getAwaitingNode();
             }
             while (actualKidPosition > 0) {
                 temp = temp.getNext();
                 actualKidPosition--;
             }
             Question question = questionService.getAll().get(actualQuestionPos);
-            question.setCorrectPos(null);
+            Question newQuestion = new Question(question.getQuestion(),question.getOptions(),
+                    null,question.getId());
 
             game.setAnswerState(true);
             game.setAwaitingKid(temp.getData());
             game.setGameState(true);
-            game.setAwaitingQuestion(new DataStructureDTO(temp.getData(),question));
+            game.setAwaitingNode(temp);
+            game.setAwaitingQuestion(new DataStructureDTO(temp.getData(),newQuestion));
 
-            return new DataStructureDTO(temp.getData(), question);
+            return new DataStructureDTO(temp.getData(), newQuestion);
         }
         else {
             throw new TangoException("No se puede jugar si todavia no se ha respondido");
@@ -147,6 +148,30 @@ public class TingoTangoService {
     }
     public DataStructureDTO getQuestion (){
         return game.getAwaitingQuestion();
+    }
+
+    public String answerQuestion(DataStructureDTO response)throws TangoException{
+       if(response.getKidData().getId().equals(game.getAwaitingQuestion().getKidData().getId())){
+
+           Question question = questionService.getQuestionById(response.getQuestionData().getId());
+
+           if(question.getCorrectPos().equals(response.getQuestionData().getCorrectPos())){
+               game.setAnswerState(false);
+               game.setAwaitingKid(null);
+               return "Respuesta correcta, continua"+ game.getAwaitingQuestion().getKidData().getName();
+           }
+           else {
+               //Change parameters
+               game.setAwaitingNode(game.getAwaitingNode().getNext());
+               game.setAnswerState(false);
+               listDEService.getKids().deleteById(game.getAwaitingKid().getId());
+               game.setAwaitingKid(null);
+               return "Jugador eliminado continua"+game.getAwaitingNode().getData().getName();
+           }
+       }
+       else{
+           throw new TangoException("Debe respodner el jugador preguntado");
+       }
     }
 
 }

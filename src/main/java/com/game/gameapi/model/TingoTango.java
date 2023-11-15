@@ -14,5 +14,6 @@ public class TingoTango {
     private boolean gameState;
     private boolean answerState;
     private Kid awaitingKid;
+    private NodeDECircular awaitingNode;
     private DataStructureDTO awaitingQuestion;
 }
