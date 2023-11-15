@@ -27,7 +27,7 @@ public class ListDECircular {
             this.head=newNode;
         }
         this.size++;
-        System.out.println("New size value: "+this.size);
+
 
     }
 
@@ -45,7 +45,6 @@ public class ListDECircular {
 
         }
         this.size++;
-        System.out.println("New size value: "+this.size);
     }
 
     public List<Kid> getAll() throws TangoException {
@@ -111,6 +110,49 @@ public class ListDECircular {
         }
         this.size--;
         System.out.println("New size value: "+this.size);
+    }
+
+    public NodeDECircular deleteById(String id) throws TangoException {
+        if (this.head == null) {
+            throw new TangoException("Lista vacia");
+        } else {
+            NodeDECircular temp = this.head;
+            do {
+                if (temp.getData().getId().equals(id)) {
+                    // If node to be deleted is head node
+                    if (temp == this.head) {
+                        this.head = this.head.getNext();
+                        this.head.setPrevious(temp.getPrevious());
+                    }
+                    // Change next only if node to be deleted is NOT the last node
+                    if (temp.getNext() != null) {
+                        temp.getNext().setPrevious(temp.getPrevious());
+                    }
+                    // Change prev only if node to be deleted is NOT the first node
+                    if (temp.getPrevious() != null) {
+                        temp.getPrevious().setNext(temp.getNext());
+                    }
+                    this.size--;
+                    return temp;
+                }
+                temp = temp.getNext();
+            } while (temp != this.head);
+            throw new TangoException("ID not found");
+        }
+    }
+
+
+    public void moveKid (int pos, String kidId) throws TangoException{
+        int actualPos = pos%this.size;
+            try {
+                NodeDECircular deletedKid = this.deleteById(kidId);
+                this.insertInPos(actualPos,deletedKid.getData());
+            } catch (TangoException e) {
+                throw new TangoException(e.getMessage());
+            }
+
+
+
     }
 
 }

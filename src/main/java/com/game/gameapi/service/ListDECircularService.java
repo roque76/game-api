@@ -49,4 +49,13 @@ public class ListDECircularService {
         kids.addToStart(kid);
         return "Adicionado";
     }
+
+    public String moveKid(int pos, String kidId) throws TangoException{
+        try {
+            kids.moveKid(pos,kidId);
+            return "Niño movido";
+        } catch (TangoException e) {
+            throw new TangoException(e.getMessage());
+        }
+    }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 public class Question {
     private String question;
     private List<String> options;
-    private byte correctPos;
+    private Byte correctPos;
     private String id;
 }

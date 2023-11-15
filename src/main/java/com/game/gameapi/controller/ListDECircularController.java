@@ -46,4 +46,16 @@ public class ListDECircularController {
                     null,errors),HttpStatus.OK);
         }
     }
+    @GetMapping(path = "/movekid/{pos}/{kidid}")
+    public ResponseEntity<ResponseDTO> moveKid(@PathVariable int pos, @PathVariable String kidid){
+        try {
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.OK.value(),
+                    listDECircularService.moveKid(pos,kidid),null),HttpStatus.OK);
+        } catch (TangoException e) {
+            List<String> errors = new ArrayList<>();
+            errors.add(e.getMessage());
+            return new ResponseEntity<>(new ResponseDTO(HttpStatus.BAD_REQUEST.value(),
+                    null,errors),HttpStatus.OK);
+        }
+    }
 }
