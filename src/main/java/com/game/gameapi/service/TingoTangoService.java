@@ -113,7 +113,12 @@ public class TingoTangoService {
     }
 
     public DataStructureDTO roleGame() throws TangoException{
-        if(game.getAwaitingKid()==null) {
+        if(listDEService.getKids().getSize()==1){
+            game.setGameState(false);
+            throw new TangoException("El juego termino puesto que solo hay un participante"+ game.getAwaitingNode().getData().getName()+"Gano el juego");
+        }
+
+        else if(game.getAwaitingKid()==null) {
             Random rand = new Random();
             int randomPosition = rand.nextInt(2000);
             int actualKidPosition = randomPosition % listDEService.getKids().getSize();
@@ -151,14 +156,20 @@ public class TingoTangoService {
     }
 
     public String answerQuestion(DataStructureDTO response)throws TangoException{
-       if(response.getKidData().getId().equals(game.getAwaitingQuestion().getKidData().getId())){
+
+        if (game.getAwaitingQuestion()==null){
+            throw new TangoException("No hay una pregunta por responder");
+        }
+       else if(response.getKidData().getId().equals(game.getAwaitingQuestion().getKidData().getId())){
 
            Question question = questionService.getQuestionById(response.getQuestionData().getId());
 
            if(question.getCorrectPos().equals(response.getQuestionData().getCorrectPos())){
                game.setAnswerState(false);
                game.setAwaitingKid(null);
-               return "Respuesta correcta, continua"+ game.getAwaitingQuestion().getKidData().getName();
+               String name = game.getAwaitingQuestion().getKidData().getName();
+               game.setAwaitingQuestion(null);
+               return "Respuesta correcta, continua " + name;
            }
            else {
                //Change parameters
@@ -166,7 +177,8 @@ public class TingoTangoService {
                game.setAnswerState(false);
                listDEService.getKids().deleteById(game.getAwaitingKid().getId());
                game.setAwaitingKid(null);
-               return "Jugador eliminado continua"+game.getAwaitingNode().getData().getName();
+               game.setAwaitingQuestion(null);
+               return "Jugador eliminado continua " +game.getAwaitingNode().getData().getName();
            }
        }
        else{
