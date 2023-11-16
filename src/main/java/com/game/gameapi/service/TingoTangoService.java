@@ -69,12 +69,20 @@ public class TingoTangoService {
         }
     }
 
-    public String addKidToEnd (Kid kid){
-       return listDEService.addToEnd(kid);
+    public String addKidToEnd (Kid kid) throws TangoException{
+        try {
+            return listDEService.addToEnd(kid);
+        } catch (TangoException e) {
+            throw new TangoException(e.getMessage());
+        }
     }
 
-    public String addToStart (Kid kid){
-        return listDEService.addToStart(kid);
+    public String addToStart (Kid kid) throws TangoException{
+        try {
+            return listDEService.addToStart(kid);
+        } catch (TangoException e) {
+            throw new TangoException(e.getMessage());
+        }
     }
 
     public String deleteKidInPos(int pos)throws TangoException{
@@ -122,7 +130,6 @@ public class TingoTangoService {
             Random rand = new Random();
             int randomPosition = rand.nextInt(2000);
             int actualKidPosition = randomPosition % listDEService.getKids().getSize();
-            int actualQuestionPos = randomPosition % questionService.getAll().size();
 
             NodeDECircular temp;
             if (game.getAwaitingKid() == null) {
@@ -139,9 +146,16 @@ public class TingoTangoService {
                 }
                 actualKidPosition--;
             }
-            Question question = questionService.getAll().get(actualQuestionPos);
+            Question question;
+
+            do {
+                int randomNumb = rand.nextInt(2000);
+                int actualPos = randomNumb % questionService.getAll().size();
+                question = questionService.getAll().get(actualPos);
+            } while (!question.getQuestionCity().equals(temp.getData().getKidCity()));
+
             Question newQuestion = new Question(question.getQuestion(),question.getOptions(),
-                    null,question.getId());
+                    null,question.getId(),question.getQuestionCity());
 
             game.setAnswerState(true);
             game.setAwaitingKid(temp.getData());

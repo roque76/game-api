@@ -1,23 +1,23 @@
-What is the capital of France?|Paris,London,Berlin,Madrid|0|q1
-Who wrote 'Romeo and Juliet'?|Shakespeare,Hemingway,Twain,Austen|0|q2
-What is the largest mammal?|Elephant,Blue Whale,Giraffe,Gorilla|1|q3
-What is the capital of Germany?|Berlin,Paris,London,Madrid|0|q4
-Who wrote ‘Pride and Prejudice’?|Austen,Shakespeare,Hemingway,Twain|0|q5
-What is the largest bird?|Ostrich,Eagle,Penguin,Parrot|0|q6
-What is the capital of Italy?|Rome,Berlin,Paris,London|0|q7
-Who wrote ‘The Old Man and the Sea’?|Hemingway,Austen,Shakespeare,Twain|0|q8
-What is the largest reptile?|Saltwater Crocodile,Alligator,Turtle,Anaconda|0|q9
-What is the capital of Spain?|Madrid,Rome,Berlin,Paris|0|q10
-Who wrote ‘Adventures of Huckleberry Finn’?|Twain,Hemingway,Austen,Shakespeare|0|q11
-What is the largest fish?|Whale Shark,Great White Shark,Blue Marlin,Swordfish|0|q12
-What is the capital of Canada?|Ottawa,Washington D.C.,London,Paris|0|q13
-What is the capital of Japan?|Tokyo,Beijing,Seoul,Manila|0|q14
-Who wrote ‘To Kill a Mockingbird’?|Harper Lee,George Orwell,Ernest Hemingway,Mark Twain|0|q15
-What is the largest planet?|Jupiter,Mars,Venus,Earth|0|q16
-What is the capital of Australia?|Canberra,Sydney,Melbourne,Brisbane|0|q17
-Who wrote ‘1984’?|George Orwell,Harper Lee,Ernest Hemingway,Mark Twain|0|q18
-What is the largest ocean?|Pacific Ocean,Atlantic Ocean,Indian Ocean,Arctic Ocean|0|q19
-What is the capital of Brazil?|Brasília,Rio de Janeiro,São Paulo,Salvador|0|q20
-Who wrote ‘Moby-Dick’?|Herman Melville,Harper Lee,George Orwell,Ernest Hemingway|0|q21
-What is the largest continent?|Asia,Africa,Europe,North America|0|q22
-What is the capital of Russia?|Moscow,St. Petersburg,Kazan,Sochi|0|q23
+What is the capital of France?|Paris,London,Berlin,Madrid|0|q1|Manizales,01
+Who wrote 'Romeo and Juliet'?|Shakespeare,Hemingway,Twain,Austen|0|q2|Pereira,02
+What is the largest mammal?|Elephant,Blue Whale,Giraffe,Gorilla|1|q3|Pitalito,03
+What is the capital of Germany?|Berlin,Paris,London,Madrid|0|q4|Mocoa,04
+Who wrote ‘Pride and Prejudice’?|Austen,Shakespeare,Hemingway,Twain|0|q5|Manizales,01
+What is the largest bird?|Ostrich,Eagle,Penguin,Parrot|0|q6|Pereira,02
+What is the capital of Italy?|Rome,Berlin,Paris,London|0|q7|Pitalito,03
+Who wrote ‘The Old Man and the Sea’?|Hemingway,Austen,Shakespeare,Twain|0|q8|Mocoa,04
+What is the largest reptile?|Saltwater Crocodile,Alligator,Turtle,Anaconda|0|q9|Manizales,01
+What is the capital of Spain?|Madrid,Rome,Berlin,Paris|0|q10|Pereira,02
+Who wrote ‘Adventures of Huckleberry Finn’?|Twain,Hemingway,Austen,Shakespeare|0|q11|Pitalito,03
+What is the largest fish?|Whale Shark,Great White Shark,Blue Marlin,Swordfish|0|q12|Mocoa,04
+What is the capital of Canada?|Ottawa,Washington D.C.,London,Paris|0|q13|Manizales,01
+What is the capital of Japan?|Tokyo,Beijing,Seoul,Manila|0|q14|Pereira,02
+Who wrote ‘To Kill a Mockingbird’?|Harper Lee,George Orwell,Ernest Hemingway,Mark Twain|0|q15|Pitalito,03
+What is the largest planet?|Jupiter,Mars,Venus,Earth|0|q16|Mocoa,04
+What is the capital of Australia?|Canberra,Sydney,Melbourne,Brisbane|0|q17|Manizales,01
+Who wrote ‘1984’?|George Orwell,Harper Lee,Ernest Hemingway,Mark Twain|0|q18|Pereira,02
+What is the largest ocean?|Pacific Ocean,Atlantic Ocean,Indian Ocean,Arctic Ocean|0|q19|Pitalito,03
+What is the capital of Brazil?|Brasília,Rio de Janeiro,São Paulo,Salvador|0|q20|Mocoa,04
+Who wrote ‘Moby-Dick’?|Herman Melville,Harper Lee,George Orwell,Ernest Hemingway|0|q21|Manizales,01
+What is the largest continent?|Asia,Africa,Europe,North America|0|q22|Pereira,02
+What is the capital of Russia?|Moscow,St. Petersburg,Kazan,Sochi|0|q23|Pitalito,03

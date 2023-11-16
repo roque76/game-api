@@ -3,10 +3,9 @@ package com.game.gameapi.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
 @Data
-public class Kid {
+@AllArgsConstructor
+public class City {
     private String name;
-    private String id;
-    private City kidCity;
+    private String cityId;
 }

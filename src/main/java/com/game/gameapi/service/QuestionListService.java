@@ -1,6 +1,7 @@
 package com.game.gameapi.service;
 
 import com.game.gameapi.exceptions.TangoException;
+import com.game.gameapi.model.City;
 import com.game.gameapi.model.Question;
 import com.game.gameapi.model.QuestionList;
 import lombok.Data;
@@ -28,13 +29,19 @@ public class QuestionListService {
                 Byte correctPos = Byte.parseByte(parts[2]);
                 String id = parts[3];
 
-                Question question = new Question(questionText, Arrays.asList(options), correctPos, id);
+                String[] cityInfo = parts[4].split(",");
+                String cityName = cityInfo[0];
+                String cityId = cityInfo[1];
+                City questionCity = new City(cityName, cityId);
+
+                Question question = new Question(questionText, Arrays.asList(options), correctPos, id, questionCity);
                 questions.addQuestion(question);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     public String addNewQuestion(Question newQuestion){
         questions.addQuestion(newQuestion);
