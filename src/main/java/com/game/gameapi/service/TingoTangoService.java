@@ -112,7 +112,7 @@ public class TingoTangoService {
         }
     }
 
-    public DataStructureDTO roleGame() throws TangoException{
+    public DataStructureDTO roleGame(String direction) throws TangoException{
         if(listDEService.getKids().getSize()==1){
             game.setGameState(false);
             throw new TangoException("El juego termino puesto que solo hay un participante"+ game.getAwaitingNode().getData().getName()+"Gano el juego");
@@ -131,7 +131,12 @@ public class TingoTangoService {
                 temp = game.getAwaitingNode();
             }
             while (actualKidPosition > 0) {
-                temp = temp.getNext();
+                if(direction.equals("r")){
+                    temp = temp.getNext();
+                }
+                else if(direction.equals("l")){
+                    temp = temp.getPrevious();
+                }
                 actualKidPosition--;
             }
             Question question = questionService.getAll().get(actualQuestionPos);
